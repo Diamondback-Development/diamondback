@@ -1,26 +1,26 @@
-# XX (Double X or DubX)
+# Diamondback
 
-[![Package XX](https://github.com/XX-Development/XX/actions/workflows/package-xx.yml/badge.svg?branch=master)](https://github.com/XX-Development/XX/actions/workflows/package-xx.yml)
-[![GitHub Contributors](https://img.shields.io/github/contributors/XX-Development/XX?label=Contributors)](https://github.com/XX-Development/XX/graphs/contributors)
-![GitHub Stars](https://img.shields.io/github/stars/XX-Development/XX?label=Stars)
+[![Package Diamondback](https://github.com/Diamondback-Development/diamondback/actions/workflows/package-xx.yml/badge.svg?branch=master)](https://github.com/Diamondback-Development/diamondback/actions/workflows/package-xx.yml)
+[![GitHub Contributors](https://img.shields.io/github/contributors/Diamondback-Development/diamondback?label=Contributors)](https://github.com/Diamondback-Development/diamondback/graphs/contributors)
+![GitHub Stars](https://img.shields.io/github/stars/Diamondback-Development/diamondback?label=Stars)
 
 ## Sub Repos
-[XX Examples](https://github.com/WolfTheDeveloper/XX-Examples)
+[Diamondback Examples](https://github.com/WolfTheDeveloper/XX-Examples)
 
-[XX Website](https://github.com/WolfTheDeveloper/XXWebsite)
+[Diamondback Website](https://github.com/WolfTheDeveloper/XXWebsite)
 
-## About XX
+## About Diamondback
 
-XX is an open-source programming language built on python. XX's goal is to be a bridge between programming languages and allow programmers to code in multiple languages in one script.
+Diamondback is an open-source programming language built on python. Diamondback's goal is to be a bridge between programming languages and allow programmers to code in multiple languages in one script.
 
 ## How to conribute
 
 In order to contribute, you need to be familiar with python. Additions to XX need to be useful for many people, not just you are a select few. If you do not want to contribute but want to help out, please open an issue on any bugs.
 
-## XX Founder
+## Diamondback Founder
 
-Zander Lewis (TheMidnightWolf or WolfTheDev) started this project with some help with ChatGPT on February 16, 2024. Zander started this project at age 15 and came up with the idea that XX can be a bridge between languages, doing what other languages couldn't do (see [About XX](https://github.com/WolfTheDeveloper/XX#about-xx)).
+Zander Lewis (TheMidnightWolf or WolfTheDev) started this project with some help with ChatGPT on February 16, 2024. Zander started this project at age 15 and came up with the idea that Diamondback can be a bridge between languages, doing what other languages couldn't do (see [About Diamondback](https://github.com/Diamondback-Development/diamondback#about-diamondback)).
 
-## How to run XX
+## How to run Diamondback
 
-For now, you run the program as 'python main.py xxfilename.xx'. For example, you would run 'python main.py example.xx' to run your program.
+For now, you run the program as 'python main.py dbfilename.diba'. For example, you would run 'python main.py example.diba' to run your program.
