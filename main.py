@@ -46,12 +46,12 @@ class Interpreter:
                     else:
                         self.current_function_body.append(stripped_line)
                 else:   
-                    code_to_execute.append(('xx', stripped_line))
+                    code_to_execute.append(('diba', stripped_line))
          
         for code_type, code in code_to_execute:
             if code_type == 'plang':
                 self.execute_python_code(code)
-            elif code_type == 'xx':
+            elif code_type == 'diba':
                 self.parse_line(code)
 
     def execute_python_code(self, python_code):
@@ -180,7 +180,7 @@ class Interpreter:
             return
 
         try:
-            with open(f'{library_name}.xxl', 'r') as file:
+            with open(f'{library_name}.dbl', 'r') as file:
                 library_code = file.readlines()
 
             current_vars = self.variables.copy()
@@ -205,12 +205,12 @@ class Interpreter:
  
 if __name__ == '__main__':
     if len(sys.argv) != 2:
-        print("Usage: python main.py <filename.xx>")
+        print("Usage: python main.py <filename.diba> or diba <filename.diba>")
         sys.exit(1)
 
     filename = sys.argv[1]
-    if not filename.endswith('.xx'):
-        print("Error: File must have a .xx extension")
+    if not filename.endswith('.diba'):
+        print("Error: File must have a .diba extension")
         sys.exit(1)
 
     interpreter = Interpreter()
