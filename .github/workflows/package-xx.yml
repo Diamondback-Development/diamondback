@@ -1,4 +1,4 @@
-name: Package XX
+name: Package Diamondback
 
 on:
   push:
@@ -23,11 +23,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install pyinstaller
 
-    - name: Package XX into a .exe file
+    - name: Package Diamondback into a .exe file
       run: pyinstaller --onefile main.py
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
-        name: XX-executable
+        name: Diamondback-exe
         path: dist/main.exe
