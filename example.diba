@@ -1,3 +1,5 @@
+import library [varcopy]
+
 x = 10
 
 [plang python]
@@ -8,5 +10,16 @@ x = random.randint(0,9999)
 y = int(x * x / x)
 [endplang]
 
+print(a)
+print(b)
 print(x)
 print(y)
+
+def h()
+[plang python]
+import random
+
+abc = random.randint(0,3)
+print(abc)
+[endplang]
+endf
