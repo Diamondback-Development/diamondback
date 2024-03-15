@@ -1,6 +1,7 @@
 # Diamondback
 
 [![Package Diamondback](https://github.com/Diamondback-Development/diamondback/actions/workflows/package-diba.yml/badge.svg?branch=master)](https://github.com/Diamondback-Development/diamondback/actions/workflows/package-diba.yml)
+[![CodeQL](https://github.com/Diamondback-Development/diamondback/actions/workflows/codeql.yml/badge.svg)](https://github.com/Diamondback-Development/diamondback/actions/workflows/codeql.yml)
 [![GitHub Contributors](https://img.shields.io/github/contributors/Diamondback-Development/diamondback?label=Contributors)](https://github.com/Diamondback-Development/diamondback/graphs/contributors)
 ![GitHub Stars](https://img.shields.io/github/stars/Diamondback-Development/diamondback?label=Stars)
 
