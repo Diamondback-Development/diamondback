@@ -6,28 +6,77 @@ on:
       - master
 
 jobs:
-  package:
+  package-windows:
     runs-on: windows-latest
-
     steps:
-    - name: Check out repository
-      uses: actions/checkout@v3
+      - name: Check out repository
+        uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.x'
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install pyinstaller
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller
 
-    - name: Package Diamondback into a .exe file
-      run: pyinstaller --onefile diamondback-interpreter.py
+      - name: Package Diamondback into a .exe file
+        run: pyinstaller --onefile diamondback-interpreter.py
 
-    - name: Upload artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: Diamondback-exe
-        path: dist/diamondback-interpreter.exe
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Diamondback-exe
+          path: dist/diamondback-interpreter.exe
+
+  package-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller
+
+      - name: Package Diamondback into an executable
+        run: pyinstaller --onefile diamondback-interpreter.py
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Diamondback-linux
+          path: dist/diamondback-interpreter
+
+  package-mac:
+    runs-on: macos-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller
+
+      - name: Package Diamondback into a binary
+        run: pyinstaller --onefile diamondback-interpreter.py
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Diamondback-mac
+          path: dist/diamondback-interpreter
