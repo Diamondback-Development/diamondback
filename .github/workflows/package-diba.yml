@@ -30,4 +30,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: Diamondback-exe
-        path: dist/diamondback.exe
+        path: dist/diamondback-interpreter.exe
