@@ -81,7 +81,8 @@ class Interpreter:
         print(*args, **kwargs)
 
     def parse_line(self, line):
-        if not line or line.startswith("//"):
+        line = line.split("//")[0].strip()
+        if not line:
             return
         if line.startswith("def ") and line.endswith("()"):
             self.handle_function_definition(line[4:-2])
