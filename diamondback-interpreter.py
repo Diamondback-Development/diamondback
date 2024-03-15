@@ -213,7 +213,7 @@ class Interpreter:
 
             self.imported_libraries[library_name] = True
         except FileNotFoundError:
-            print(f"Library not found: {library_name}")
+            print(f"Library not found: libs/{library_name}.dbl")
             sys.exit(1)
 
 
