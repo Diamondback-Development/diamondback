@@ -1,6 +1,6 @@
 import library [varcopy]
 
-x = 10
+var x = 10
 
 [plang python]
 import random
