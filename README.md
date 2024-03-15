@@ -16,7 +16,7 @@ Diamondback is an open-source programming language built on python. Diamondback'
 
 ## How to conribute
 
-In order to contribute, you need to be familiar with python. Additions to XX need to be useful for many people, not just you are a select few. If you do not want to contribute but want to help out, please open an issue on any bugs.
+In order to contribute, you need to be familiar with python. Additions to Diamondback need to be useful for many people, not just you are a select few. If you do not want to contribute but want to help out, please open an issue on any bugs. Fork this repository in order to start contributing.
 
 ## Diamondback Founder
 
