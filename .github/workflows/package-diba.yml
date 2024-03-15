@@ -24,10 +24,10 @@ jobs:
         pip install pyinstaller
 
     - name: Package Diamondback into a .exe file
-      run: pyinstaller --onefile main.py
+      run: pyinstaller --onefile diamondback-interpreter.py
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
         name: Diamondback-exe
-        path: dist/main.exe
+        path: dist/diamondback.exe
