@@ -28,7 +28,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: Diamondback-exe
+          name: Diamondback-windows
           path: dist/diamondback-interpreter.exe
 
   package-linux:
