@@ -23,4 +23,4 @@ Zander Lewis (TheMidnightWolf or WolfTheDev) started this project with some help
 
 ## How to run Diamondback
 
-For now, you download main.py and run the program as 'python main.py dbfilename.diba'. For example, you would run 'python main.py example.diba' to run your program.
+For now, you download main.py and run the program as 'python diamondback-interpreter.py dbfilename.diba'. For example, you would run 'python diamondback-interpreter.py example.diba' to run your program.
