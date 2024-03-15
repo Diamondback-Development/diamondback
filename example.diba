@@ -17,9 +17,8 @@ print(y)
 
 def h()
 [plang python]
-import random
-
-abc = random.randint(0,3)
-print(abc)
+print("hhhh")
 [endplang]
 endf
+
+h()
