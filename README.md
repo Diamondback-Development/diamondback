@@ -1,6 +1,7 @@
 # Diamondback
 
 [![Package Diamondback](https://github.com/Diamondback-Development/diamondback/actions/workflows/package-diba.yml/badge.svg?branch=master)](https://github.com/Diamondback-Development/diamondback/actions/workflows/package-diba.yml)
+[![CodeQL](https://github.com/Diamondback-Development/diamondback/actions/workflows/codeql.yml/badge.svg)](https://github.com/Diamondback-Development/diamondback/actions/workflows/codeql.yml)
 [![GitHub Contributors](https://img.shields.io/github/contributors/Diamondback-Development/diamondback?label=Contributors)](https://github.com/Diamondback-Development/diamondback/graphs/contributors)
 ![GitHub Stars](https://img.shields.io/github/stars/Diamondback-Development/diamondback?label=Stars)
 
@@ -15,7 +16,7 @@ Diamondback is an open-source programming language built on python. Diamondback'
 
 ## How to conribute
 
-In order to contribute, you need to be familiar with python. Additions to XX need to be useful for many people, not just you are a select few. If you do not want to contribute but want to help out, please open an issue on any bugs.
+In order to contribute, you need to be familiar with python. Additions to Diamondback need to be useful for many people, not just you are a select few. If you do not want to contribute but want to help out, please open an issue on any bugs. Fork this repository in order to start contributing.
 
 ## Diamondback Founder
 
