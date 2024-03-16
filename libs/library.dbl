@@ -1,3 +1,7 @@
 import lib2 [varcopy]
 
+<<<<<<< Updated upstream
 var a = abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
+=======
+var a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+>>>>>>> Stashed changes

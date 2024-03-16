@@ -16,9 +16,22 @@ print(x)
 print(y)
 
 def h()
+<<<<<<< Updated upstream
 [plang python]
 print("hhhh")
 [endplang]
 endf
 
 h()
+=======
+print("xyz")
+var v = 1
+endf
+
+h()
+abc()
+
+print(v)
+
+print('hi')
+>>>>>>> Stashed changes
