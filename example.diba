@@ -18,10 +18,15 @@ print(x)
 print(y)
 
 def h()
+
+print("xyz")
+var v = 1
+
 print("x")
 endf
 
 h()
 abc()
 
+print(v)
 print('hi')
