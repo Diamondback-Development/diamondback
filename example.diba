@@ -2,6 +2,7 @@ import library [varcopy]
 
 var x = 10
 
+def aa()
 [plang python]
 import random
 
@@ -9,6 +10,7 @@ print(x)
 x = random.randint(0,9999)
 y = int(x * x / x)
 [endplang]
+endf
 
 print(a)
 print(b)
@@ -16,9 +18,10 @@ print(x)
 print(y)
 
 def h()
-[plang python]
-print("hhhh")
-[endplang]
+print("x")
 endf
 
 h()
+abc()
+
+print('hi')

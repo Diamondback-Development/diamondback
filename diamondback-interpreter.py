@@ -59,23 +59,20 @@ class Interpreter:
                 self.parse_line(code)
 
     def execute_python_code(self, python_code):
-        if not self.in_function_definition:
-            local_scope = {**self.variables}
-            global_scope = {"__builtins__": __builtins__, "print": self.custom_print}
+        local_scope = {**self.variables}
+        global_scope = {"__builtins__": __builtins__, "print": self.custom_print}
 
-            try:
-                exec(python_code, global_scope, local_scope)
+        try:
+            exec(python_code, global_scope, local_scope)
 
-                self.variables.update(local_scope)
+            self.variables.update(local_scope)
 
-                for var in local_scope:
-                    if callable(local_scope[var]):
-                        self.functions[var] = local_scope[var]
+            for var in local_scope:
+                if callable(local_scope[var]):
+                    self.functions[var] = local_scope[var]
 
-            except Exception as e:
-                print(f"Error executing embedded Python code: {e}")
-        else:
-            return
+        except Exception as e:
+            print(f"Error executing embedded Python code: {e}")
 
     def custom_print(self, *args, **kwargs):
         print(*args, **kwargs)
@@ -135,9 +132,14 @@ class Interpreter:
             try:
                 return int(token)
             except ValueError:
-                if token.startswith('"') and token.endswith('"'):
+                if (token.startswith('"') and token.endswith('"')) or (
+                    token.startswith("'") and token.endswith("'")
+                ):
                     return token[1:-1]
-                return self.variables.get(token, token)
+                elif token in self.variables:
+                    return self.variables[token]
+                else:
+                    return f"Unrecognized token/variable: {token}"
 
         while "+" in tokens or "-" in tokens or "*" in tokens or "/" in tokens:
             for i, token in enumerate(tokens):
