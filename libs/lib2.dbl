@@ -1,8 +1,5 @@
 var b = 21
-<<<<<<< Updated upstream
-=======
 
 def abc()
 print("abc")
 endf
->>>>>>> Stashed changes
