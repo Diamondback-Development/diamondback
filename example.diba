@@ -2,6 +2,7 @@ import library [varcopy]
 
 var x = 10
 
+// Run Python Code
 [plang python]
 import random
 
@@ -10,19 +11,27 @@ x = random.randint(0,9999)
 y = int(x * x / x)
 [endplang]
 
+// Run Lua Code
+[plang lua]
+print("hello from lua")
+[endplang]
+
+// Print the Variables
 print(a)
 print(b)
 print(x)
 print(y)
 
+// Testing Functions are Variables Inside Functions
 def h()
 print("xyz")
 var v = 1
 endf
 
+// Run the Function `h` and `abc` which is in a library
 h()
 abc()
 
+// Print `v` and `'hi'`
 print(v)
-
 print('hi')
