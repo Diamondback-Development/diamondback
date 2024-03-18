@@ -10,7 +10,6 @@ print(x)
 x = random.randint(0,9999)
 y = int(x * x / x)
 [endplang]
-endf
 
 // Run Lua Code
 divider()
