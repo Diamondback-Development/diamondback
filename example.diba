@@ -14,7 +14,8 @@ y = int(x * x / x)
 // Run Lua Code
 divider()
 [plang lua]
-print("Hello from Lua!")
+local name = "Lua"
+print("Hello from " ..name.. "!")
 [endplang]
 
 // Print the Variables
