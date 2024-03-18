@@ -1,5 +1,6 @@
 import operator
 import sys
+from lupa import LuaRuntime
 
 
 class Interpreter:
@@ -11,6 +12,7 @@ class Interpreter:
         self.current_function_name = ""
         self.current_function_body = []
         self.allow_library_vars = False
+        self.lua = LuaRuntime()
 
     def run_from_file(self, filename):
         with open(filename, "r") as file:
@@ -19,7 +21,9 @@ class Interpreter:
 
     def run(self, lines):
         in_python_block = False
+        in_lua_block = False
         python_code = ""
+        lua_code = ""
         code_to_execute = []
 
         for line in lines:
@@ -29,14 +33,28 @@ class Interpreter:
                 in_python_block = True
                 continue
 
+            elif stripped_line == "[plang lua]":
+                in_lua_block = True
+                continue
+
             if stripped_line == "[endplang]" and in_python_block:
                 in_python_block = False
                 code_to_execute.append(("python", python_code.strip()))
                 python_code = ""
                 continue
+            
+            elif stripped_line == "[endplang]" and in_lua_block:
+                in_lua_block = False
+                code_to_execute.append(("lua", lua_code.strip()))
+                lua_code = ""
+                continue
 
             if in_python_block:
                 python_code += line + "\n"
+            
+            elif in_lua_block:
+                lua_code += line + "\n"
+
             else:
 
                 if self.in_function_definition:
@@ -55,6 +73,8 @@ class Interpreter:
         for code_type, code in code_to_execute:
             if code_type == "python":
                 self.execute_python_code(code)
+            elif code_type == "lua":
+                self.execute_lua_code(code)
             elif code_type == "diba":
                 self.parse_line(code)
 
@@ -73,6 +93,14 @@ class Interpreter:
 
         except Exception as e:
             print(f"Error executing embedded Python code: {e}")
+
+    def execute_lua_code(self, lua_code):
+        try:
+            result = self.lua.execute(lua_code)
+            if result is not None:
+                print(result)
+        except Exception as e:
+            print(f"Error executing Lua code: {e}")
 
     def custom_print(self, *args, **kwargs):
         print(*args, **kwargs)
