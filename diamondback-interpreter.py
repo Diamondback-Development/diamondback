@@ -160,9 +160,7 @@ class Interpreter:
             try:
                 return int(token)
             except ValueError:
-                if (token.startswith('"') and token.endswith('"')) or (
-                    token.startswith("'") and token.endswith("'")
-                ):
+                if (token.startswith('"') and token.endswith('"')) or (token.startswith("'") and token.endswith("'")) or token.startswith('`') and token.endswith('`'):
                     return token[1:-1]
                 elif token in self.variables:
                     return self.variables[token]
