@@ -10,6 +10,7 @@ print(x)
 x = random.randint(0,9999)
 y = int(x * x / x)
 [endplang]
+endf
 
 // Run Lua Code
 [plang lua]
@@ -24,8 +25,11 @@ print(y)
 
 // Testing Functions are Variables Inside Functions
 def h()
+
 print("xyz")
 var v = 1
+
+print("x")
 endf
 
 // Run the Function `h` and `abc` which is in a library
