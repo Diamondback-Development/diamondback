@@ -149,6 +149,8 @@ class Interpreter:
             )
         elif line.startswith("print(") and line.endswith(")"):
             self.handle_print(line[6:-1])
+        elif line.startswith("divider()"):
+            print("-------------------")
         elif line.startswith("import ") and line.endswith(" [varcopy]"):
             library_name = line[7:-10].strip()
             self.handle_import(library_name, True)
