@@ -15,7 +15,8 @@ endf
 // Run Lua Code
 divider()
 [plang lua]
-print("Hello from Lua!")
+local name = "Diamondback"
+print("Hello, " .. name .. "!")
 [endplang]
 
 // Print the Variables
@@ -39,7 +40,7 @@ divider()
 h()
 abc()
 
-// Print `v` and `'hi'`
+// Print the value of `v` and prints `'hi'`
 divider()
 print(v)
 print('hi')
