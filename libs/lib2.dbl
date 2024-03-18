@@ -1,5 +1,5 @@
 var b = 21
 
 def abc()
-print("abc")
+print('abc')
 endf

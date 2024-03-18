@@ -27,8 +27,11 @@ print(y)
 
 // Testing Functions are Variables Inside Functions
 def h()
+
 print("xyz")
 var v = 1
+
+print("x")
 endf
 
 // Run the Function `h` and `abc` which is in a library
@@ -36,7 +39,7 @@ divider()
 h()
 abc()
 
-// Print `v` and `'hi'`
+// Print the value of `v` and prints `'hi'`
 divider()
 print(v)
 print('hi')
