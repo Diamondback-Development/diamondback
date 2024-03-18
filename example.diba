@@ -13,11 +13,13 @@ y = int(x * x / x)
 endf
 
 // Run Lua Code
+divider()
 [plang lua]
-print("hello from lua")
+print("Hello from Lua!")
 [endplang]
 
 // Print the Variables
+divider()
 print(a)
 print(b)
 print(x)
@@ -33,9 +35,11 @@ print("x")
 endf
 
 // Run the Function `h` and `abc` which is in a library
+divider()
 h()
 abc()
 
 // Print `v` and `'hi'`
+divider()
 print(v)
 print('hi')
