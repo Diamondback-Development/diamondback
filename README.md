@@ -7,7 +7,7 @@
 ![GitHub Stars](https://img.shields.io/github/stars/Diamondback-Development/diamondback?label=Stars)
 
 ## Sub Repos
-[Diamondback Examples](https://github.com/WolfTheDeveloper/XX-Examples)
+[Diamondback Examples](https://github.com/Diamondback-Development/diamondback-examples)
 
 [Diamondback Website](https://github.com/WolfTheDeveloper/XXWebsite)
 
