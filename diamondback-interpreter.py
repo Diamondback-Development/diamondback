@@ -1,7 +1,9 @@
 import operator
 import sys
 from lupa import LuaRuntime
-#from jnius import autoclass
+
+# from jnius import autoclass
+
 
 class Interpreter:
     def __init__(self):
@@ -22,10 +24,10 @@ class Interpreter:
     def run(self, lines):
         in_python_block = False
         in_lua_block = False
-        #in_java_block = False
+        # in_java_block = False
         python_code = ""
         lua_code = ""
-        #java_code = ""
+        # java_code = ""
         code_to_execute = []
 
         for line in lines:
@@ -38,37 +40,37 @@ class Interpreter:
             elif stripped_line == "[plang lua]":
                 in_lua_block = True
                 continue
-            
-            #elif stripped_line == "[plang java]":
-                #in_java_block = True
-                #continue
+
+            # elif stripped_line == "[plang java]":
+            # in_java_block = True
+            # continue
 
             if stripped_line == "[endplang]" and in_python_block:
                 in_python_block = False
                 code_to_execute.append(("python", python_code.strip()))
                 python_code = ""
                 continue
-            
+
             elif stripped_line == "[endplang]" and in_lua_block:
                 in_lua_block = False
                 code_to_execute.append(("lua", lua_code.strip()))
                 lua_code = ""
                 continue
 
-            #elif stripped_line == "[endplang]" and in_java_block:
-                #in_java_block = False
-                #code_to_execute.append(("java", java_code.strip()))
-                #java_code = ""
-                #continue
+            # elif stripped_line == "[endplang]" and in_java_block:
+            # in_java_block = False
+            # code_to_execute.append(("java", java_code.strip()))
+            # java_code = ""
+            # continue
 
             if in_python_block:
                 python_code += line + "\n"
-            
+
             elif in_lua_block:
                 lua_code += line + "\n"
-            
-            #elif in_java_block:
-                #java_code += line + "\n"
+
+            # elif in_java_block:
+            # java_code += line + "\n"
 
             else:
 
@@ -90,8 +92,8 @@ class Interpreter:
                 self.execute_python_code(code)
             elif code_type == "lua":
                 self.execute_lua_code(code)
-            #elif code_type == "java":
-                #self.execute_java_code(code)
+            # elif code_type == "java":
+            # self.execute_java_code(code)
             elif code_type == "diba":
                 self.parse_line(code)
 
@@ -146,7 +148,7 @@ class Interpreter:
             )
         elif line.startswith("print(") and line.endswith(")"):
             self.handle_print(line[6:-1])
-        elif line.startswith("divider()"):
+        elif line.startswith("print_divider()"):
             print("-------------------")
         elif line.startswith("import ") and line.endswith(" [varcopy]"):
             library_name = line[7:-10].strip()
@@ -179,7 +181,11 @@ class Interpreter:
             try:
                 return int(token)
             except ValueError:
-                if (token.startswith('"') and token.endswith('"')) or (token.startswith("'") and token.endswith("'")) or (token.startswith('`') and token.endswith('`')):
+                if (
+                    (token.startswith('"') and token.endswith('"'))
+                    or (token.startswith("'") and token.endswith("'"))
+                    or (token.startswith("`") and token.endswith("`"))
+                ):
 
                     return token[1:-1]
                 elif token in self.variables:
