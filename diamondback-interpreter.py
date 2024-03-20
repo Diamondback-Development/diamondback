@@ -151,12 +151,17 @@ class Interpreter:
             print(f"Error executing embedded Python code: {e}")
 
     def execute_lua_code(self, lua_code):
+        for var_name, var_value in self.variables.items():
+            self.lua.globals()[var_name] = var_value
         try:
             result = self.lua.execute(lua_code)
             if result is not None:
                 print(result)
+            for var_name in self.lua.globals().keys():
+                self.variables[var_name] = self.lua.globals()[var_name]
         except Exception as e:
             print(f"Error executing Lua code: {e}")
+            sys.exit(1)
 
     def execute_ruby_code(self, ruby_code):
         try:
@@ -167,16 +172,18 @@ class Interpreter:
                 print(result.stderr)
         except Exception as e:
             print(f"Error executing Ruby code: {e}")
+            sys.exit(1)
 
     def execute_fsharp_code(self, fsharp_code):
         try:
-            result = subprocess.run(["dotnet", "fsi", "--quiet"], capture_output=True, text=True)
+            result = subprocess.run(["dotnet", "fsi", "--quiet"], input=fsharp_code, capture_output=True, text=True)
             if result.stdout:
                 print(result.stdout)
             if result.stderr:
                 print(result.stderr)
         except Exception as e:
             print(f"Error executing F# code: {e}")
+            sys.exit(1)
 
     def custom_print(self, *args, **kwargs):
         print(*args, **kwargs)

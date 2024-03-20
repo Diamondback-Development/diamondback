@@ -16,29 +16,47 @@ print_divider()
 [plang lua]
 local name = "Lua"
 print("Hello from " ..name.. "!")
+print(x)
 [endplang]
 
+print_divider()
 [plang ruby]
-def add(a, b)
-  return a + b
-end
+result = 3 + 4
 
-# Call the function with arguments 3 and 4
-result = add(3, 4)
-
-# Print the result
 print result
 [endplang]
 
+print_divider()
 [plang f#]
-let c = x + y
+module Integers =
+    let sampleInteger = 176
+
+    // Do some arithmetic starting with the first integer
+    let sampleInteger2 = (sampleInteger / 4 + 5 - 7) * 4
+
+    // A list of the numbers from 0 to 99
+    let sampleNumbers = [0 .. 9]
+
+    // A list of tuples containing all the numbers from 0 to 99 and their squares
+    let sampleTableOfSquares = [for i in 0 .. 9 -> (i, i * i)]
+
+    // Print the table of squares
+    printfn "The table of squares from 0 to 9 is:\n%A" sampleTableOfSquares
+
+// Basic functions
+module BasicFunctions =
+    // Define a function that accepts an integer argument and returns an integer
+    let func1 x = x * x + 3
+
+    // Apply the function
+    let result1 = func1 25
+    printfn "The result of squaring the integer 25 and adding 3 is %d" result1
 [endplang]
 
 // Print the Variables
 print_divider()
 print(a)
 print(b)
-print(c)
 print(x)
 print(y)
 
