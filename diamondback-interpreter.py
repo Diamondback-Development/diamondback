@@ -1,6 +1,8 @@
 import operator
 import sys
 from lupa import LuaRuntime
+import ruby
+import subprocess
 
 # from jnius import autoclass
 
@@ -24,9 +26,13 @@ class Interpreter:
     def run(self, lines):
         in_python_block = False
         in_lua_block = False
+        in_ruby_block = False
+        in_fsharp_block = False
         # in_java_block = False
         python_code = ""
         lua_code = ""
+        ruby_code = ""
+        fsharp_code = ""
         # java_code = ""
         code_to_execute = []
 
@@ -39,6 +45,14 @@ class Interpreter:
 
             elif stripped_line == "[plang lua]":
                 in_lua_block = True
+                continue
+
+            elif stripped_line == "[plang ruby]":
+                in_ruby_block = True
+                continue
+
+            elif stripped_line == "[plang f#]":
+                in_fsharp_block = True
                 continue
 
             # elif stripped_line == "[plang java]":
@@ -57,6 +71,18 @@ class Interpreter:
                 lua_code = ""
                 continue
 
+            elif stripped_line == "[endplang]" and in_ruby_block:
+                in_ruby_block = False
+                code_to_execute.append(("ruby", ruby_code.strip()))
+                ruby_code = ""
+                continue
+
+            elif stripped_line == "[endplang]" and in_fsharp_block:
+                in_fsharp_block = False
+                code_to_execute.append(("fsharp", fsharp_code.strip()))
+                fsharp_code = ""
+                continue
+
             # elif stripped_line == "[endplang]" and in_java_block:
             # in_java_block = False
             # code_to_execute.append(("java", java_code.strip()))
@@ -68,6 +94,12 @@ class Interpreter:
 
             elif in_lua_block:
                 lua_code += line + "\n"
+
+            elif in_ruby_block:
+                ruby_code += line + "\n"
+
+            elif in_fsharp_block:
+                fsharp_code += line + "\n"
 
             # elif in_java_block:
             # java_code += line + "\n"
@@ -92,10 +124,15 @@ class Interpreter:
                 self.execute_python_code(code)
             elif code_type == "lua":
                 self.execute_lua_code(code)
+            elif code_type == "ruby":
+                self.execute_ruby_code(code)
+            elif code_type == "fsharp":
+                self.execute_fsharp_code(code)
             # elif code_type == "java":
             # self.execute_java_code(code)
             elif code_type == "diba":
                 self.parse_line(code)
+
 
     def execute_python_code(self, python_code):
         local_scope = {**self.variables}
@@ -120,6 +157,26 @@ class Interpreter:
                 print(result)
         except Exception as e:
             print(f"Error executing Lua code: {e}")
+
+    def execute_ruby_code(self, ruby_code):
+        try:
+            result = subprocess.run(["ruby", "-e", ruby_code], capture_output=True, text=True)
+            if result.stdout:
+                print(result.stdout)
+            if result.stderr:
+                print(result.stderr)
+        except Exception as e:
+            print(f"Error executing Ruby code: {e}")
+
+    def execute_fsharp_code(self, fsharp_code):
+        try:
+            result = subprocess.run(["dotnet", "fsi", "--quiet"], capture_output=True, text=True)
+            if result.stdout:
+                print(result.stdout)
+            if result.stderr:
+                print(result.stderr)
+        except Exception as e:
+            print(f"Error executing F# code: {e}")
 
     def custom_print(self, *args, **kwargs):
         print(*args, **kwargs)

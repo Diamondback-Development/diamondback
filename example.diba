@@ -18,10 +18,27 @@ local name = "Lua"
 print("Hello from " ..name.. "!")
 [endplang]
 
+[plang ruby]
+def add(a, b)
+  return a + b
+end
+
+# Call the function with arguments 3 and 4
+result = add(3, 4)
+
+# Print the result
+print result
+[endplang]
+
+[plang f#]
+let c = x + y
+[endplang]
+
 // Print the Variables
 print_divider()
 print(a)
 print(b)
+print(c)
 print(x)
 print(y)
 
@@ -37,7 +54,7 @@ print_divider()
 h()
 abc()
 
-// Print the value of `v` and prints `'hi'`
+// Print the value of `v` and prints `hi`
 print_divider()
 print(v)
 print('hi')
