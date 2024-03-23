@@ -1,8 +1,10 @@
+import os
 import operator
 import sys
 from lupa import LuaRuntime
 import ruby
 import subprocess
+import shutil
 
 # from jnius import autoclass
 
@@ -153,12 +155,38 @@ class Interpreter:
     def execute_lua_code(self, lua_code):
         for var_name, var_value in self.variables.items():
             self.lua.globals()[var_name] = var_value
+
         try:
-            result = self.lua.execute(lua_code)
-            if result is not None:
-                print(result)
+            if "love." in lua_code:
+                # Love2D code detected
+                temp_dir = "temp_love2d_project"
+                os.makedirs(temp_dir, exist_ok=True)
+                with open(os.path.join(temp_dir, "main.lua"), "w") as file:
+                    for var_name, var_value in self.variables.items():
+                        # Only add the variable to Lua if it's a string or a number
+                        if isinstance(var_value, (str, int, float)):
+                            if isinstance(var_value, str):
+                                # Escape backslashes and quotes for valid Lua syntax
+                                var_value = var_value.replace('\\', '\\\\').replace('"', '\\"')
+                                file.write(f'{var_name} = "{var_value}"\n')
+                            else:
+                                file.write(f"{var_name} = {var_value}\n")
+                    # After variables, write the actual Love2D script
+                    file.write(lua_code)
+                print("Instance is running. Exit instance window to stop LOVE2D.")
+                subprocess.run([r"C:\Program Files\LOVE\love.exe", temp_dir])
+
+                shutil.rmtree(temp_dir)
+            else:
+                # Regular Lua code
+                result = self.lua.execute(lua_code)
+                if result is not None:
+                    print(result)
+
+            # Update the interpreter's variables with Lua's global variables
             for var_name in self.lua.globals().keys():
                 self.variables[var_name] = self.lua.globals()[var_name]
+
         except Exception as e:
             print(f"Error executing Lua code: {e}")
             sys.exit(1)

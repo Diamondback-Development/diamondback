@@ -1,0 +1,45 @@
+[plang lua]
+local particles = {}
+
+    function love.load()
+        love.graphics.setBackgroundColor(0.15, 0.15, 0.15) -- Set background color
+        love.window.setTitle("Fluid Simulation Game")
+    end
+
+    function love.update(dt)
+        -- Spawn particles
+        if love.mouse.isDown(1) then
+            local x, y = love.mouse.getPosition()
+            for i = 1, 10 do
+                local angle = math.random() * 2 * math.pi
+                local speed = math.random() * 200 + 50
+                table.insert(particles, {
+                    x = x,
+                    y = y,
+                    vx = math.cos(angle) * speed,
+                    vy = math.sin(angle) * speed,
+                    life = 2
+                })
+            end
+        end
+
+        -- Update particles
+        for i = #particles, 1, -1 do
+            local p = particles[i]
+            p.x = p.x + p.vx * dt
+            p.y = p.y + p.vy * dt
+            p.life = p.life - dt
+            if p.life <= 0 then
+                table.remove(particles, i)
+            end
+        end
+    end
+
+    function love.draw()
+        -- Draw particles
+        for _, p in ipairs(particles) do
+            love.graphics.setColor(0.1, 0.6, 0.9, p.life / 2)
+            love.graphics.circle("fill", p.x, p.y, 5)
+        end
+    end
+[endplang]

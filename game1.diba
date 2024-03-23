@@ -1,0 +1,242 @@
+[plang lua]
+-- Load resources
+function love.load()
+    love.window.setTitle(" ")
+    shotCooldown = 0.05
+    timeSinceLastShot = shotCooldown
+
+    player = {
+        x = love.graphics.getWidth() / 2,
+        y = love.graphics.getHeight() / 2,
+        width = 20,
+        height = 20,
+        speed = 200,
+        bullets = {},
+        isAlive = true
+    }
+
+    enemies = {}
+    enemySpawnTimer = 0
+    maxEnemies = 15
+    ne = 0
+    points = 0
+end
+
+-- Check for collision between two rectangles
+function checkCollision(x1, y1, w1, h1, x2, y2, w2, h2)
+    return x1 < x2 + w2 and
+           x2 < x1 + w1 and
+           y1 < y2 + h2 and
+           y2 < y1 + h1
+end
+
+-- Update game state
+function love.update(dt)
+    if isWindowMoving and not player.isAlive then
+            local x, y = love.window.getPosition()
+            local dx = (targetX - x) * dt * 10  -- Adjust the multiplier for speed
+            local dy = (targetY - y) * dt * 10  -- Adjust the multiplier for speed
+
+            -- Move the window
+            love.window.setPosition(x + dx, y + dy)
+
+            -- Check if the window is close enough to the target position
+            if math.abs(x - targetX) < 1 and math.abs(y - targetY) < 1 then
+                isWindowMoving = false
+                love.window.setPosition(targetX, targetY)  -- Snap to target position
+            end
+        end
+    if player.isAlive then
+        -- Move player
+        if love.keyboard.isDown("w") then
+            player.y = math.max(0, player.y - player.speed * dt)
+        elseif love.keyboard.isDown("s") then
+            player.y = math.min(love.graphics.getHeight() - player.height, player.y + player.speed * dt)
+        end
+        if love.keyboard.isDown("a") then
+            player.x = math.max(0, player.x - player.speed * dt)
+        elseif love.keyboard.isDown("d") then
+            player.x = math.min(love.graphics.getWidth() - player.width, player.x + player.speed * dt)
+        end
+
+        -- Fire bullets
+        if love.mouse.isDown(1) and timeSinceLastShot >= shotCooldown then
+            timeSinceLastShot = 0
+            local mouseX, mouseY = love.mouse.getPosition()
+            local angle = math.atan2(mouseY - player.y, mouseX - player.x)
+            local bulletSpeed = 300
+            table.insert(player.bullets, {
+                x = player.x + player.width / 2,
+                y = player.y + player.height / 2,
+                dx = math.cos(angle) * bulletSpeed,
+                dy = math.sin(angle) * bulletSpeed,
+                width = 5,
+                height = 5
+            })
+        end
+        timeSinceLastShot = timeSinceLastShot + dt
+
+        -- Update bullets
+        for i = #player.bullets, 1, -1 do
+            local bullet = player.bullets[i]
+            bullet.x = bullet.x + bullet.dx * dt
+            bullet.y = bullet.y + bullet.dy * dt
+
+            local x, y = love.window.getPosition()
+
+            -- Check if bullet hits the left edge of the window
+            if bullet.x < 0 then
+                table.remove(player.bullets, i)
+            -- Check if bullet hits the right edge of the window
+            elseif bullet.x > love.graphics.getWidth() then
+                table.remove(player.bullets, i)
+            -- Check if bullet hits the top edge of the window
+            elseif bullet.y < 0 then
+                table.remove(player.bullets, i)
+            -- Check if bullet hits the bottom edge of the window
+            elseif bullet.y > love.graphics.getHeight() then
+                table.remove(player.bullets, i)
+            end
+        end
+
+        -- Spawn enemies
+        enemySpawnTimer = enemySpawnTimer + dt
+        if enemySpawnTimer > .5 then
+            if ne < maxEnemies then
+                enemySpawnTimer = 0
+                local enemyType = love.math.random(1, 3) -- Randomly choose between three types
+                local newEnemy = {
+                    x = love.math.random(0, love.graphics.getWidth() - 20),
+                    y = -20,
+                    width = 20,
+                    height = 20,
+                    speed = 100,
+                    type = enemyType,
+                    hitsToDestroy = 1
+                }
+
+                if enemyType == 2 then -- Fast enemy
+                    newEnemy.width = 10
+                    newEnemy.height = 10
+                    newEnemy.speed = 150
+                elseif enemyType == 3 then -- Slow and tough enemy
+                    newEnemy.width = 30
+                    newEnemy.height = 30
+                    newEnemy.speed = 50
+                    newEnemy.hitsToDestroy = 50
+                end
+                ne = ne + 1
+                table.insert(enemies, newEnemy)
+            end
+        end
+
+        -- Update enemies
+        for i = #enemies, 1, -1 do
+            local enemy = enemies[i]
+
+
+            -- Calculate direction towards player
+            local dx = player.x - enemy.x
+            local dy = player.y - enemy.y
+            local distance = math.sqrt(dx * dx + dy * dy)
+            local normalized_dx = dx / distance
+            local normalized_dy = dy / distance
+
+            -- Move enemy towards player
+            enemy.x = enemy.x + normalized_dx * enemy.speed * dt
+            enemy.y = enemy.y + normalized_dy * enemy.speed * dt
+
+            -- Check collision with player
+            if checkCollision(player.x, player.y, player.width, player.height,
+                              enemy.x, enemy.y, enemy.width, enemy.height) then
+                player.isAlive = false
+            end
+
+            -- Remove enemy if off-screen
+            if enemy.y > love.graphics.getHeight() then
+                table.remove(enemies, i)
+            end
+        end
+
+        -- Check bullet-enemy collisions
+        for i = #enemies, 1, -1 do
+            local enemy = enemies[i]
+            for j = #player.bullets, 1, -1 do
+                local bullet = player.bullets[j]
+                if checkCollision(bullet.x, bullet.y, bullet.width, bullet.height,
+                                enemy.x, enemy.y, enemy.width, enemy.height) then
+                    enemy.hitsToDestroy = enemy.hitsToDestroy - 1 -- Decrease hits remaining
+                    table.remove(player.bullets, j)
+                    if enemy.hitsToDestroy <= 0 then
+                        table.remove(enemies, i)
+                        points = points + 1
+                        ne = ne - 1
+                    end
+                    break
+                end
+            end
+        end
+    end
+end
+
+-- Draw game elements
+function love.draw()
+    if player.isAlive then
+        love.graphics.printf(ne, 0, 100, 100)
+        -- Draw player
+        love.graphics.setColor(0, 1, 0)
+        love.graphics.rectangle("fill", player.x, player.y, player.width, player.height)
+
+        -- Draw bullets
+        love.graphics.setColor(1, 1, 0)
+        for _, bullet in ipairs(player.bullets) do
+            love.graphics.rectangle("fill", bullet.x, bullet.y, bullet.width, bullet.height)
+        end
+
+         -- Draw enemies
+        for _, enemy in ipairs(enemies) do
+            if enemy.type == 2 then -- Fast enemy
+                love.graphics.setColor(0, 0, 1)
+            elseif enemy.type == 3 then -- Slow and tough enemy
+                love.graphics.setColor(0.5, 0.5, 0.5)
+            else -- Normal enemy
+                love.graphics.setColor(1, 0, 0)
+            end
+            love.graphics.rectangle("fill", enemy.x, enemy.y, enemy.width, enemy.height)
+        end
+
+        else
+            -- Game over
+            love.graphics.setColor(1, 1, 1)
+            love.graphics.printf("Game Over. Press `R` to restart.", 0, love.graphics.getHeight() / 2, love.graphics.getWidth(), "center")
+            love.graphics.printf("Total Points: " .. points, 0, (love.graphics.getHeight() / 2) - 20, love.graphics.getWidth(), "center")
+        end
+    end
+function resetGame()
+    player.x = love.graphics.getWidth() / 2
+    player.y = love.graphics.getHeight() / 2
+    player.isAlive = true
+    player.bullets = {}
+    ne = 0
+    enemies = {}
+    points = 0
+    enemySpawnTimer = 0
+
+    -- Get the screen dimensions
+    local screenWidth, screenHeight = love.window.getDesktopDimensions()
+
+    -- Calculate the target position to center the window
+    local windowWidth, windowHeight = love.graphics.getDimensions()
+    targetX = (screenWidth - windowWidth) / 2
+    targetY = (screenHeight - windowHeight) / 2
+
+    -- Set the window moving flag
+    isWindowMoving = true
+end
+
+function love.keypressed(key)
+    if key == "r" and not player.isAlive then
+        resetGame()
+    end
+end
+[endplang]

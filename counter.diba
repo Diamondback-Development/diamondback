@@ -1,0 +1,65 @@
+var x = 0
+
+[plang python]
+import random
+
+x = random.randint(-1,101)
+[endplang]
+
+print_divider()
+
+[plang ruby]
+print 'Initializing Counter with random start number...'
+[endplang]
+
+print_divider()
+
+[plang lua]
+-- Define the initial state
+function love.load()
+    count = x
+    button_increase = {x = 200, y = 300, width = 100, height = 50, label = "Increase"}
+    button_decrease = {x = 320, y = 300, width = 100, height = 50, label = "Decrease"}
+    love.window.setTitle("Counter App")
+end
+
+-- Check if the mouse is over a button
+function isMouseOverButton(button)
+    local mx, my = love.mouse.getPosition()
+    return mx > button.x and mx < button.x + button.width and
+           my > button.y and my < button.y + button.height
+end
+
+-- Update the count when a button is clicked
+function love.mousepressed(x, y, button, istouch, presses)
+    if button == 1 then -- If the left mouse button is pressed
+        if isMouseOverButton(button_increase) then
+            count = count + 1
+        elseif isMouseOverButton(button_decrease) then
+            count = count - 1
+        end
+    end
+end
+
+-- Draw the buttons and the count
+function love.draw()
+    -- Draw increase button
+    love.graphics.setColor(0.5, 0.5, 0.5)
+    love.graphics.rectangle("fill", button_increase.x, button_increase.y, button_increase.width, button_increase.height)
+    love.graphics.setColor(0, 0, 0)
+    love.graphics.print(button_increase.label, button_increase.x + 10, button_increase.y + 10)
+
+    -- Draw decrease button
+    love.graphics.setColor(0.5, 0.5, 0.5)
+    love.graphics.rectangle("fill", button_decrease.x, button_decrease.y, button_decrease.width, button_decrease.height)
+    love.graphics.setColor(0, 0, 0)
+    love.graphics.print(button_decrease.label, button_decrease.x + 10, button_decrease.y + 10)
+
+    -- Draw the current count
+    love.graphics.setColor(255, 255, 255)
+    love.graphics.print("Count: " .. count, 300, 400)
+
+    -- Reset color to white for anything else that's drawn
+    love.graphics.setColor(1, 1, 1)
+end
+[endplang]
