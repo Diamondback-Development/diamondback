@@ -30,3 +30,13 @@ For now, you download main.py and run the program as 'python diamondback-interpr
 ## Pre-Pre-Release
 
 If you want to check out changes that are not released under release or pre-release, check out the 'WolfTheDeveloper-Workspace' branch.
+
+## Supported [plang] Languages
+
+- [plang python] - v0.0.2-alpha
+
+- [plang lua] - v0.2.0-beta (LOVE2D will be v0.3.0-beta)
+
+- [plang ruby] - Will be v0.3.0-beta
+
+- [plang f#] - Will be v0.3.0-beta
