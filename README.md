@@ -26,25 +26,25 @@ Zander Lewis (TheMidnightWolf or WolfTheDev) started this project with some help
 
 ## How to run Diamondback
 
-For now, you download main.py and run the program as 'python diamondback-interpreter.py dbfilename.diba'. For example, you would run 'python diamondback-interpreter.py example.diba' to run your program.
+For now, you download main.py and run the program as `python diamondback-interpreter.py dbfilename.diba`. For example, you would run `python diamondback-interpreter.py example.diba` to run your program.
 
 ## Pre-Pre-Release
 
 If you want to check out changes that are not released under release or pre-release, check out the 'WolfTheDeveloper-Workspace' branch.
 
-## Supported [plang] Languages
+## Supported `[plang]` Languages
 
-- [plang python] - v0.0.2-alpha
+- `[plang python]` - v0.0.2-alpha
 
-- [plang lua] - v0.2.0-beta (LOVE2D will be v0.3.0-beta)
+- `[plang lua]` - v0.2.0-beta (`LOVE2D` will be v0.3.0-beta)
 
-- [plang ruby] - Will be v0.3.0-beta
+- `[plang ruby]` - Will be v0.3.0-beta
 
-- [plang f#] - Will be v0.3.0-beta
+- `[plang f#]` - Will be v0.3.0-beta
 
-- [plang nodejs] - Will be v0.4.0-beta
+- `[plang nodejs]` - Will be v0.4.0-beta
 
-- [plang photon] - Will be v0.4.0-beta
+- `[plang photon]` - Will be v0.4.0-beta
 
 ## Roadmap
 
