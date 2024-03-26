@@ -1,5 +1,6 @@
 # Diamondback
 
+![Discord](https://img.shields.io/discord/1209157984010109018?logo=discord&label=Discord)
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 [![Package Diamondback](https://github.com/Diamondback-Development/diamondback/actions/workflows/package-diba.yml/badge.svg?branch=master)](https://github.com/Diamondback-Development/diamondback/actions/workflows/package-diba.yml)
 [![CodeQL](https://github.com/Diamondback-Development/diamondback/actions/workflows/codeql.yml/badge.svg)](https://github.com/Diamondback-Development/diamondback/actions/workflows/codeql.yml)
