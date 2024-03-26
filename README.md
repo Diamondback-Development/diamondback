@@ -41,14 +41,20 @@ If you want to check out changes that are not released under release or pre-rele
 
 - [plang f#] - Will be v0.3.0-beta
 
+- [plang nodejs] - Will be v0.4.0-beta
+
+- [plang photon] - Will be v0.4.0-beta
+
 ## Roadmap
 
 Changes coming in the future:
 
 - Full communication and implementation of F#, Lua, and Ruby
 
-- Inplementation of Photon, PyOwO and RickRoll Language
+- Inplementation of Photon, PyOwO, Node.js, and RickRoll Language
 
 - Recode to use Lexer and Parser
 
 - Create standard libraries
+
+- Create website
